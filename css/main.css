@@ -1,0 +1,23 @@
+/* ═══════════════════════════════════════════════════
+   GRAND EGYPTIAN MUSEUM — MAIN STYLESHEET
+   Imports all CSS modules in dependency order
+   Pattern: Design Tokens → Reset → Animations
+           → Layout → Components → Sections
+   ═══════════════════════════════════════════════════ */
+
+@import url('https://fonts.googleapis.com/css2?family=Cinzel+Decorative:wght@400;700&family=Cinzel:wght@400;500;600;700&family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400;1,600&display=swap');
+
+/* 1. Foundation */
+@import 'tokens.css';
+@import 'reset.css';
+@import 'animations.css';
+
+/* 2. Structure */
+@import 'layout.css';
+
+/* 3. Components */
+@import 'nav.css';
+
+/* 4. Sections */
+@import 'hero.css';
+@import 'sections.css';

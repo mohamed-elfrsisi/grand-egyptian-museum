@@ -1,0 +1,219 @@
+/* ═══════════════════════════════════════════════════
+   GRAND EGYPTIAN MUSEUM — LAYOUT & UTILITIES
+   ═══════════════════════════════════════════════════ */
+
+/* ── Container ── */
+.container {
+    width: 100%;
+    padding-inline: var(--side);
+}
+
+/* ── Section wrapper ── */
+.section {
+    padding-block: var(--section);
+    padding-inline: var(--side);
+}
+
+/* ── Section head (centred eyebrow + heading block) ── */
+.section-head {
+    text-align: center;
+    margin-bottom: clamp(3rem, 5vw, 6rem);
+}
+
+.section-head .lead {
+    margin-inline: auto;
+}
+
+/* ── Eyebrow label ── */
+.eyebrow {
+    display: inline-flex;
+    align-items: center;
+    gap: .75rem;
+    font-family: var(--font-heading);
+    font-size: var(--text-xs);
+    letter-spacing: .44em;
+    text-transform: uppercase;
+    color: var(--clr-gold);
+    margin-bottom: var(--space-4);
+}
+
+.eyebrow::before,
+.eyebrow::after {
+    content: '';
+    display: block;
+    width: 28px;
+    height: 1px;
+    background: linear-gradient(90deg, transparent, var(--clr-gold-dim));
+}
+
+.eyebrow::after {
+    background: linear-gradient(270deg, transparent, var(--clr-gold-dim));
+}
+
+/* ── Headings ── */
+.heading {
+    font-family: var(--font-display);
+    font-size: var(--text-2xl);
+    color: var(--clr-text-bright);
+    line-height: 1.06;
+    margin-bottom: var(--space-4);
+}
+
+.heading-lg {
+    font-family: var(--font-display);
+    font-size: var(--text-3xl);
+    color: var(--clr-text-bright);
+    line-height: 1.04;
+}
+
+/* ── Lead paragraph ── */
+.lead {
+    font-family: var(--font-body);
+    font-style: italic;
+    font-size: clamp(1.1rem, 1.6vw, 1.5rem);
+    color: var(--clr-text-dim);
+    line-height: 1.85;
+    max-width: 58ch;
+}
+
+/* ── Gold ornament divider ── */
+.ornament {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 1rem;
+    margin: 1rem auto;
+    color: rgba(201, 148, 58, .32);
+    font-size: .85rem;
+    letter-spacing: .6em;
+    max-width: 220px;
+}
+
+.ornament::before,
+.ornament::after {
+    content: '';
+    flex: 1;
+    height: 1px;
+    background: linear-gradient(90deg, transparent, rgba(201, 148, 58, .28));
+}
+
+.ornament::after {
+    background: linear-gradient(270deg, transparent, rgba(201, 148, 58, .28));
+}
+
+/* ── Buttons ── */
+.btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: .75rem;
+    font-family: var(--font-heading);
+    font-size: var(--text-xs);
+    letter-spacing: .28em;
+    text-transform: uppercase;
+    font-weight: 600;
+    border-radius: var(--radius);
+    border: none;
+    cursor: pointer;
+    position: relative;
+    overflow: hidden;
+    min-height: 48px;
+    padding: .9rem 2.2rem;
+    white-space: nowrap;
+    transition: transform var(--dur-base) var(--ease),
+        box-shadow var(--dur-base);
+}
+
+.btn:active {
+    transform: scale(.97) !important;
+}
+
+.btn::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: rgba(255, 255, 255, .08);
+    opacity: 0;
+    transition: opacity var(--dur-base);
+}
+
+.btn:hover::after {
+    opacity: 1;
+}
+
+.btn-gold {
+    background: linear-gradient(135deg, var(--clr-gold-dim), var(--clr-gold), var(--clr-gold-dim));
+    background-size: 200% auto;
+    color: var(--clr-bg);
+    box-shadow: 0 4px 24px rgba(201, 148, 58, .28);
+    transition: background-position .5s, transform var(--dur-base), box-shadow var(--dur-base);
+}
+
+.btn-gold:hover {
+    background-position: right center;
+    transform: translateY(-3px) scale(1.02);
+    box-shadow: 0 14px 48px rgba(201, 148, 58, .4);
+}
+
+.btn-ghost {
+    background: transparent;
+    color: var(--clr-gold);
+    border: 1px solid rgba(201, 148, 58, .38);
+}
+
+.btn-ghost:hover {
+    background: rgba(201, 148, 58, .07);
+    border-color: var(--clr-gold);
+    transform: translateY(-2px);
+}
+
+/* ── Utility classes ── */
+.text-center {
+    text-align: center;
+}
+
+.mx-auto {
+    margin-inline: auto;
+}
+
+.mt-8 {
+    margin-top: var(--space-8);
+}
+
+.mt-16 {
+    margin-top: var(--space-16);
+}
+
+.mb-8 {
+    margin-bottom: var(--space-8);
+}
+
+.mb-16 {
+    margin-bottom: var(--space-16);
+}
+
+.hidden {
+    display: none;
+}
+
+/* ── Page-load progress bar ── */
+.progress-bar {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 2px;
+    background: linear-gradient(90deg, var(--clr-gold-dim), var(--clr-gold), var(--clr-gold-light));
+    transform-origin: left;
+    z-index: var(--z-top);
+    animation: progressLoad 1.8s var(--ease-c) both;
+}
+
+/* ── Floating gold line decoration ── */
+.gold-line {
+    display: block;
+    width: 48px;
+    height: 1px;
+    background: linear-gradient(90deg, var(--clr-gold), transparent);
+    margin-bottom: var(--space-4);
+}

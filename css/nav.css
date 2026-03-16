@@ -1,0 +1,265 @@
+/* ═══════════════════════════════════════════════════
+   GRAND EGYPTIAN MUSEUM — NAVIGATION COMPONENT
+   ═══════════════════════════════════════════════════ */
+
+/* ── Navbar shell ── */
+.navbar {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    z-index: var(--z-nav);
+    height: var(--nav-h);
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding-inline: var(--side);
+    background: rgba(5, 4, 2, .94);
+    backdrop-filter: blur(28px) saturate(1.4);
+    border-bottom: 1px solid var(--clr-border);
+    animation: slideDown .9s var(--ease) both;
+}
+
+/* Animated shimmer underline */
+.navbar::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    height: 1px;
+    background: linear-gradient(90deg, transparent, var(--clr-gold-glow) 50%, transparent);
+    background-size: 200% auto;
+    animation: shimmer 4s linear infinite;
+    pointer-events: none;
+}
+
+/* ── Logo ── */
+.logo {
+    display: flex;
+    align-items: center;
+    gap: .8rem;
+    flex-shrink: 0;
+}
+
+.logo-icon {
+    position: relative;
+    width: 42px;
+    height: 42px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+}
+
+.logo-icon::before {
+    content: '𓂀';
+    position: absolute;
+    font-size: 1.4rem;
+    animation: glowText 3.5s ease-in-out infinite;
+}
+
+.logo-icon::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    border: 1px solid rgba(201, 148, 58, .38);
+    border-radius: 50%;
+    animation: spinCW 14s linear infinite;
+}
+
+.logo-ring {
+    position: absolute;
+    inset: -8px;
+    border: 1px solid rgba(201, 148, 58, .14);
+    border-radius: 50%;
+    animation: spinCCW 22s linear infinite;
+}
+
+.logo-text {
+    display: flex;
+    flex-direction: column;
+    line-height: 1.2;
+    min-width: 0;
+}
+
+.logo-name {
+    font-family: var(--font-heading);
+    font-size: clamp(.58rem, .75vw, .72rem);
+    letter-spacing: .38em;
+    text-transform: uppercase;
+    color: var(--clr-gold-light);
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.logo-sub {
+    font-family: var(--font-body);
+    font-style: italic;
+    font-size: .58rem;
+    color: var(--clr-text-ghost);
+}
+
+/* ── Nav links ── */
+.nav-links {
+    display: flex;
+    align-items: center;
+    gap: clamp(1.5rem, 2.5vw, 3rem);
+}
+
+.nav-link {
+    font-family: var(--font-heading);
+    font-size: var(--text-xs);
+    letter-spacing: .32em;
+    text-transform: uppercase;
+    color: var(--clr-text-dim);
+    padding-block: .5rem;
+    position: relative;
+    transition: color var(--dur-base) var(--ease);
+}
+
+.nav-link::after {
+    content: '';
+    position: absolute;
+    bottom: -2px;
+    left: 0;
+    width: 0;
+    height: 1px;
+    background: linear-gradient(90deg, var(--clr-gold), var(--clr-gold-light));
+    transition: width .5s var(--ease);
+}
+
+.nav-link:hover,
+.nav-link.active {
+    color: var(--clr-gold-light);
+}
+
+.nav-link:hover::after,
+.nav-link.active::after {
+    width: 100%;
+}
+
+/* ── CTA button ── */
+.nav-cta {
+    font-family: var(--font-heading);
+    font-size: var(--text-xs);
+    letter-spacing: .28em;
+    text-transform: uppercase;
+    padding: .6rem 1.5rem;
+    border: 1px solid rgba(201, 148, 58, .44);
+    color: var(--clr-gold);
+    border-radius: var(--radius);
+    position: relative;
+    overflow: hidden;
+    transition: color var(--dur-fast), border-color var(--dur-fast);
+}
+
+.nav-cta::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: var(--clr-gold);
+    transform: scaleX(0);
+    transform-origin: left;
+    transition: transform .28s var(--ease-c);
+}
+
+.nav-cta:hover {
+    color: var(--clr-bg);
+    border-color: var(--clr-gold);
+}
+
+.nav-cta:hover::before {
+    transform: scaleX(1);
+}
+
+.nav-cta span {
+    position: relative;
+    z-index: 1;
+}
+
+/* ── Hamburger ── */
+.nav-hamburger {
+    display: none;
+    flex-direction: column;
+    justify-content: center;
+    gap: 6px;
+    width: 42px;
+    height: 42px;
+    cursor: pointer;
+    padding: .55rem;
+    border: 1px solid var(--clr-border);
+    border-radius: var(--radius);
+}
+
+.nav-hamburger span {
+    display: block;
+    width: 100%;
+    height: 1.5px;
+    background: var(--clr-text);
+    transform-origin: center;
+    transition: transform .38s var(--ease), opacity .26s;
+}
+
+/* X state */
+.nav-toggle:checked~header .nav-hamburger span:nth-child(1) {
+    transform: translateY(7.5px) rotate(45deg);
+}
+
+.nav-toggle:checked~header .nav-hamburger span:nth-child(2) {
+    opacity: 0;
+    transform: scaleX(0);
+}
+
+.nav-toggle:checked~header .nav-hamburger span:nth-child(3) {
+    transform: translateY(-7.5px) rotate(-45deg);
+}
+
+/* ── Mobile nav ── */
+@media (max-width: 768px) {
+    .nav-hamburger {
+        display: flex;
+    }
+
+    .nav-links {
+        position: fixed;
+        top: var(--nav-h);
+        left: 0;
+        right: 0;
+        flex-direction: column;
+        gap: 0;
+        background: rgba(4, 3, 1, .97);
+        backdrop-filter: blur(28px);
+        padding: 1.5rem 0 2.5rem;
+        border-bottom: 1px solid var(--clr-border);
+        transform: translateY(-110%);
+        opacity: 0;
+        pointer-events: none;
+        transition: transform .5s var(--ease), opacity .38s;
+        z-index: calc(var(--z-nav) - 1);
+    }
+
+    .nav-toggle:checked~header .nav-links {
+        transform: translateY(0);
+        opacity: 1;
+        pointer-events: auto;
+    }
+
+    .nav-link {
+        display: block;
+        padding: 1.1rem var(--side);
+        border-bottom: 1px solid rgba(201, 148, 58, .06);
+        font-size: .78rem;
+    }
+
+    .nav-cta {
+        display: none;
+    }
+}
+
+@media (min-width: 769px) {
+    .nav-hamburger {
+        display: none !important;
+    }
+}
